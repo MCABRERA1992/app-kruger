@@ -1,9 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Jwt } from '../../models/jwt';
+import { Usuario } from '../../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  /**
+   * metodo para iniciar session, dentro del aplicativo
+   * @param user
+   * @returns
+   */
+  public loginSecurity(user: Usuario): Observable<Jwt> {
+    return this.httpClient.post<Jwt>('', user);
+  }
 }
