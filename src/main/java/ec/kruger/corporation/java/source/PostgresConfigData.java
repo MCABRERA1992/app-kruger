@@ -48,7 +48,7 @@ public class PostgresConfigData {
         managerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
 
         Map<String, String> propertiesMap = new HashMap<>();
-        propertiesMap.put("hibernate.hbm2ddl.auto", "update");
+        propertiesMap.put("hibernate.hbm2ddl.auto", "create-drop");
         propertiesMap.put("hibernate.show_sql", "true");
         propertiesMap.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
         managerFactoryBean.setJpaPropertyMap(propertiesMap);

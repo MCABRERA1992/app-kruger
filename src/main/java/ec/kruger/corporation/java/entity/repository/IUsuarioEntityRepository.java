@@ -4,6 +4,8 @@ import ec.kruger.corporation.java.entity.UsuarioEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author ${milton.cabrera} on 7/4/2022 23:08
  * @project app-vacunacion
@@ -11,4 +13,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface IUsuarioEntityRepository extends CrudRepository<UsuarioEntity, Long> {
+
+    Optional<UsuarioEntity> findByUserKruger(String userName);
+
 }

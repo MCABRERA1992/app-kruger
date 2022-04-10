@@ -1,7 +1,11 @@
 package ec.kruger.corporation.java.entity;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author ${milton.cabrera} on 7/4/2022 21:50
@@ -9,62 +13,76 @@ import java.io.Serializable;
  * @Version 1.0
  **/
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario_kruger")
+@NamedQuery(name = "UsuarioEntity.findAll", query = "SELECT u FROM UsuarioEntity u")
 public class UsuarioEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "usuario")
-    private String usuario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	private int idUsuario;
 
-    @Column(name = "clave")
-    private String clave;
+	@Column(name = "clave", length = 5000)
+	private String clave;
 
-    @Column(name = "rol_usuario")
-    private String rol_usuario;
+	@Column(name = "user_kruger", unique = true)
+	private String userKruger;
 
-    public UsuarioEntity() {
-    }
+	@NotNull
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "fk_usuario_rol", joinColumns = @JoinColumn(name = "fk_usuario_id"), inverseJoinColumns = @JoinColumn(name = "fk_usuario_rol_id"))
+	private List<UsuarioRolEntity> usuarioRolEntities;
 
-    public UsuarioEntity(Long idUsuario, String usuario, String clave, String rol_usuario) {
-        this.idUsuario = idUsuario;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.rol_usuario = rol_usuario;
-    }
+	public UsuarioEntity() {
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public UsuarioEntity(int idUsuario, String clave, String userKruger, List<UsuarioRolEntity> usuarioRolEntities) {
+		super();
+		this.idUsuario = idUsuario;
+		this.clave = clave;
+		this.userKruger = userKruger;
+		this.usuarioRolEntities = usuarioRolEntities;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public int getIdUsuario() {
+		return idUsuario;
+	}
 
-    public String getUsuario() {
-        return usuario;
-    }
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+	public String getClave() {
+		return clave;
+	}
 
-    public String getClave() {
-        return clave;
-    }
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
+	public String getUserKruger() {
+		return userKruger;
+	}
 
-    public String getRol_usuario() {
-        return rol_usuario;
-    }
+	public void setUserKruger(String userKruger) {
+		this.userKruger = userKruger;
+	}
 
-    public void setRol_usuario(String rol_usuario) {
-        this.rol_usuario = rol_usuario;
-    }
+	public List<UsuarioRolEntity> getUsuarioRolEntities() {
+		return usuarioRolEntities;
+	}
+
+	public void setUsuarioRolEntities(List<UsuarioRolEntity> usuarioRolEntities) {
+		this.usuarioRolEntities = usuarioRolEntities;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }
