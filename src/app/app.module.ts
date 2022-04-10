@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { StorageService } from './core/services/storage.service';
+import { AuthGuard } from './core/guards/auth.guard';
+import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,10 +31,11 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     NgxLoadingModule.forRoot({}),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ progressBar: true, enableHtml: true }),
     ReactiveFormsModule
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [StorageService, AuthGuard, AuthInterceptorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

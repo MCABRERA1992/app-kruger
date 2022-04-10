@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
+import { StorageService } from '../../services/storage.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private fb: FormBuilder,
-    private authStorage: Storage,
+    private authStorage: StorageService,
     private authService: LoginService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService) {
@@ -33,15 +34,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin() {
+  onLogin(): void {
+
     if (this.formularioUser.get('fbUsuario')?.value === undefined ||
-      this.formularioUser.get('fbUsuario')?.value === null ) {
+      this.formularioUser.get('fbUsuario')?.value === null) {
       this.toastr.warning('Advertencia', 'Ingresar un usuario, no puede estar vacio');
       return;
     }
 
     if (this.formularioUser.get('fbClave')?.value === undefined ||
-      this.formularioUser.get('fbClave')?.value === null ) {
+      this.formularioUser.get('fbClave')?.value === null) {
       this.toastr.warning('Advertencia', 'Ingresar una contraseña, no puede estar vacio');
       return;
     }
@@ -52,10 +54,12 @@ export class LoginComponent implements OnInit {
     }
 
     this.spinner.show('spinner-capacitacion');
-    this.authService.loginSecurity(user).pipe(finalize(() => this.spinner.hide('spinner-capacitacion')))
-    .subscribe(authResponse => {
-      console.log('datos consultados del usuario' + authResponse);
-    });
+    this.authService.loginSecurity(user)
+      .pipe(finalize(() => this.spinner.hide('spinner-capacitacion')))
+      .subscribe(authResponse => {
+        console.log('datos consultados del usuario' + authResponse);
+        this.router.navigate(["/empleado"]);
+      });
   }
 
 }

@@ -1,77 +1,71 @@
 import { Injectable } from '@angular/core';
+import { Jwt } from '../models/jwt';
 
-const TOKEN_KEY = 'AuthToken';
-const USERNAME_KEY = 'AuthUsername';
-const AUTHORITIES_KEY = 'AuthAuthorities';
+const TOKEN_KEY = 'Token';
+const USER_KEY = 'Usuario';
+const AUTHORITIES = 'authorities';
+const TIMEOUT = 'TimeOut';
+
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  auhtRol: Array<string> = [];
+  private static readonly KEY_USUARIO = "kruger.usuario";
+  rolUsuario: Array<string> = [];
 
   constructor() { }
 
-  /**
-   * permite setear el valor del token
-   * @param token
-   */
-   public settoken(token: string): void {
+  public setToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  /**
-   * devuelve el token autenticado
-   * @returns
-   */
-  public getToken(): string {
+  public obtenerToken(): string {
     return window.sessionStorage.getItem(TOKEN_KEY) || '';
   }
 
-  /**
-   * permite setear el valor del username
-   * @param userName
-   */
-  public setUserName(userName: string): void {
-    window.sessionStorage.removeItem(USERNAME_KEY);
-    window.sessionStorage.setItem(USERNAME_KEY, userName)
+  public setUsuario(usuario: string): void {
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, usuario);
   }
 
-  /**
-   *
-   * @returns devuelve el username autenticado
-   */
-  public getUserName(): string {
-    return window.sessionStorage.getItem(USERNAME_KEY) || '';
+
+  public getUsuario(): string {
+    return sessionStorage.getItem(USER_KEY) || '';
   }
 
-  /**
-   * permite setear el valor del authorities
-   * @param authorities
-   */
   public setAuthorities(authorities: string[]): void {
-    window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    window.sessionStorage.removeItem(AUTHORITIES);
+    window.sessionStorage.setItem(AUTHORITIES, JSON.stringify(authorities));
   }
 
-  /**
-   * devuele la lista de authorities, autenticado
-   * @returns
-   */
-  public getAuthorities(): string[] {
-    this.auhtRol = [];
-    if (window.sessionStorage.getItem(AUTHORITIES_KEY)) {
-      JSON.parse(window.sessionStorage.getItem(AUTHORITIES_KEY) || '').foreach((auth: { auht: string; }) => {
-        this.auhtRol.push(auth.auht);
+  public obtenerAuthorities(): string[] {
+    this.rolUsuario = [];
+    if (sessionStorage.getItem(AUTHORITIES)) {
+      JSON.parse(sessionStorage.getItem(AUTHORITIES) || '').array.forEach((element: { authority: string; }) => {
+        this.rolUsuario.push(element.authority);
       });
     }
-    return this.auhtRol;
+    return this.rolUsuario;
   }
 
-  /**
-   * termina la session del usuario, logoneado
-   */
+
+  public setTimeOut(timeOut: string): void {
+    window.sessionStorage.removeItem(TIMEOUT);
+    window.sessionStorage.setItem(TIMEOUT, timeOut);
+  }
+
+  public setUser(jwtToken: Jwt): void {
+    window.sessionStorage.removeItem(StorageService.KEY_USUARIO);
+    window.sessionStorage.setItem(StorageService.KEY_USUARIO, JSON.stringify(jwtToken));
+  }
+
+  public obtenerUser(): Jwt {
+    let user = sessionStorage.getItem(StorageService.KEY_USUARIO);
+    return JSON.parse(user || '');
+  }
+
   public logout(): void {
     window.sessionStorage.clear();
   }
