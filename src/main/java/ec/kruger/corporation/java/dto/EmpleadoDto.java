@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EmpleadoDto {
 
+    private Long id;
     private String cedula;
     private String nombre;
     private String apellido;
@@ -23,7 +24,7 @@ public class EmpleadoDto {
     private String fechaNacimiento;
     private String direccionDomicilio;
     private String telefonoMovil;
-    private String tipoVacunacion;
-    private HistorialVacunacionDto historialVacunacionDto;
+    private TipoVacunaDto tipoVacunaDto;
+    private EstadoVacunaDto estadoVacunaDto;
 
 }

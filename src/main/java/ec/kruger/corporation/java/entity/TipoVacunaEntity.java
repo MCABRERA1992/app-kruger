@@ -19,22 +19,21 @@ public class TipoVacunaEntity implements Serializable {
     private Long idTipoVacuna;
 
     @Column(name = "tipo_vacuna")
-    private Long tipoVacuna;
+    private String tipoVacuna;
 
     @Column(name = "fecha_vacunacion")
     private Date fechaVacunacion;
 
     @Column(name = "numero_dosis")
-    private Date numeroDosis;
+    private int numeroDosis;
 
-    @ManyToOne
-    @JoinColumn(name = "empleado_id")
+    @OneToOne(mappedBy = "tipoVacunaEntities")
     private EmpleadoEntity empleadoEntity;
 
     public TipoVacunaEntity() {
     }
 
-    public TipoVacunaEntity(Long idTipoVacuna, Long tipoVacuna, Date fechaVacunacion, Date numeroDosis, EmpleadoEntity empleadoEntity) {
+    public TipoVacunaEntity(Long idTipoVacuna, String tipoVacuna, Date fechaVacunacion, int numeroDosis, EmpleadoEntity empleadoEntity) {
         this.idTipoVacuna = idTipoVacuna;
         this.tipoVacuna = tipoVacuna;
         this.fechaVacunacion = fechaVacunacion;
@@ -50,11 +49,11 @@ public class TipoVacunaEntity implements Serializable {
         this.idTipoVacuna = idTipoVacuna;
     }
 
-    public Long getTipoVacuna() {
+    public String getTipoVacuna() {
         return tipoVacuna;
     }
 
-    public void setTipoVacuna(Long tipoVacuna) {
+    public void setTipoVacuna(String tipoVacuna) {
         this.tipoVacuna = tipoVacuna;
     }
 
@@ -66,11 +65,11 @@ public class TipoVacunaEntity implements Serializable {
         this.fechaVacunacion = fechaVacunacion;
     }
 
-    public Date getNumeroDosis() {
+    public int getNumeroDosis() {
         return numeroDosis;
     }
 
-    public void setNumeroDosis(Date numeroDosis) {
+    public void setNumeroDosis(int numeroDosis) {
         this.numeroDosis = numeroDosis;
     }
 

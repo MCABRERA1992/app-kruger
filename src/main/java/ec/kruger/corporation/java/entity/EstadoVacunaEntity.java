@@ -20,8 +20,7 @@ public class EstadoVacunaEntity implements Serializable {
     @Column(name = "decripcion_estado_vacuna")
     private String descripcionEstadoVacuna;
 
-    @ManyToOne
-    @JoinColumn(name = "empleado_id")
+    @OneToOne(mappedBy = "estadoVacunaEntities")
     private EmpleadoEntity empleadoEntitys;
 
     public EstadoVacunaEntity() {

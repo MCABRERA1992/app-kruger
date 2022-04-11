@@ -1,4 +1,4 @@
-package ec.kruger.corporation.java;
+package ec.kruger.corporation.java.enums;
 
 /**
  * @author ${milton.cabrera} on 10/4/2022 12:55

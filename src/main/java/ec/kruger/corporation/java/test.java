@@ -3,6 +3,9 @@ package ec.kruger.corporation.java;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.kruger.corporation.java.entity.EstadoVacunaEntity;
+import ec.kruger.corporation.java.entity.service.IEstadoVacunaEntityService;
+import ec.kruger.corporation.java.enums.EnumUsuarioRol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +41,7 @@ public class test implements CommandLineRunner{
 		usuarioEntity.setUserKruger("MCABRERA");
 		usuarioEntity.setUsuarioRolEntities(usuarioRolEntityHashMap);
 		this.entityService.saveOrUpdate(usuarioEntity);
+
 	}
 
 }

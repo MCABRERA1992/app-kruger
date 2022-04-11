@@ -1,11 +1,10 @@
 package ec.kruger.corporation.java.entity;
 
 import com.sun.istack.NotNull;
-import ec.kruger.corporation.java.EnumUsuarioRol;
+import ec.kruger.corporation.java.enums.EnumUsuarioRol;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author ${milton.cabrera} on 10/4/2022 12:52

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class HistorialVacunacionDto {
+public class TipoVacunaDto {
 
     private String tipoVacunacion;
     private String fechaVacunacion;

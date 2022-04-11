@@ -40,16 +40,18 @@ public class EmpleadoEntity implements Serializable {
     @Column(name = "telefono_movil")
     private String telefonoMovil;
 
-    @OneToMany(mappedBy = "empleadoEntitys")
-    private List<EstadoVacunaEntity> estadoVacunaEntities;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_estado_vacuna")
+    private EstadoVacunaEntity estadoVacunaEntities;
 
-    @OneToMany(mappedBy = "empleadoEntity")
-    private List<TipoVacunaEntity> tipoVacunaEntities;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_tipo_vacuna")
+    private TipoVacunaEntity tipoVacunaEntities;
 
     public EmpleadoEntity() {
     }
 
-    public EmpleadoEntity(Long idEmpleado, String cedula, String nombre, String apellido, String correoElectronico, Date fechaNacimiento, String direccionDomicilio, String telefonoMovil, List<EstadoVacunaEntity> estadoVacunaEntities, List<TipoVacunaEntity> tipoVacunaEntities) {
+    public EmpleadoEntity(Long idEmpleado, String cedula, String nombre, String apellido, String correoElectronico, Date fechaNacimiento, String direccionDomicilio, String telefonoMovil, EstadoVacunaEntity estadoVacunaEntities, TipoVacunaEntity tipoVacunaEntities) {
         this.idEmpleado = idEmpleado;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -126,19 +128,19 @@ public class EmpleadoEntity implements Serializable {
         this.telefonoMovil = telefonoMovil;
     }
 
-    public List<EstadoVacunaEntity> getEstadoVacunaEntities() {
+    public EstadoVacunaEntity getEstadoVacunaEntities() {
         return estadoVacunaEntities;
     }
 
-    public void setEstadoVacunaEntities(List<EstadoVacunaEntity> estadoVacunaEntities) {
+    public void setEstadoVacunaEntities(EstadoVacunaEntity estadoVacunaEntities) {
         this.estadoVacunaEntities = estadoVacunaEntities;
     }
 
-    public List<TipoVacunaEntity> getTipoVacunaEntities() {
+    public TipoVacunaEntity getTipoVacunaEntities() {
         return tipoVacunaEntities;
     }
 
-    public void setTipoVacunaEntities(List<TipoVacunaEntity> tipoVacunaEntities) {
+    public void setTipoVacunaEntities(TipoVacunaEntity tipoVacunaEntities) {
         this.tipoVacunaEntities = tipoVacunaEntities;
     }
 }
