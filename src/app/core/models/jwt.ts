@@ -1,6 +1,6 @@
 export class Jwt {
-    info_adicional!: string;
-    access_token!: string;
-    token_type!: string;
-    authorities!: string;
+  token!: string;
+  bearer!: string;
+  nameUser!: string;
+  grantedAuthorities!: string[];
 }

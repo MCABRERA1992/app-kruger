@@ -43,7 +43,7 @@ export class StorageService {
   public obtenerAuthorities(): string[] {
     this.rolUsuario = [];
     if (sessionStorage.getItem(AUTHORITIES)) {
-      JSON.parse(sessionStorage.getItem(AUTHORITIES) || '').array.forEach((element: { authority: string; }) => {
+      JSON.parse(sessionStorage.getItem(AUTHORITIES) || '').forEach((element: { authority: string; }) => {
         this.rolUsuario.push(element.authority);
       });
     }
@@ -63,7 +63,7 @@ export class StorageService {
 
   public obtenerUser(): Jwt {
     let user = sessionStorage.getItem(StorageService.KEY_USUARIO);
-    return JSON.parse(user || '');
+    return JSON.parse(user||'');
   }
 
   public logout(): void {

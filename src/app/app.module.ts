@@ -14,7 +14,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import { StorageService } from './core/services/storage.service';
 import { AuthGuard } from './core/guards/auth.guard';
-import { AuthInterceptorService } from './core/services/auth-interceptor.service';
+import { interceptorProvider } from './core/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
     ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [StorageService, AuthGuard, AuthInterceptorService],
+  providers: [StorageService, AuthGuard, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

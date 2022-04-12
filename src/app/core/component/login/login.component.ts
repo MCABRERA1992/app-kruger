@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { Jwt } from '../../models/jwt';
 import { Usuario } from '../../models/Usuario';
 import { StorageService } from '../../services/storage.service';
 import { LoginService } from './login.service';
@@ -37,28 +38,42 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
 
     if (this.formularioUser.get('fbUsuario')?.value === undefined ||
-      this.formularioUser.get('fbUsuario')?.value === null) {
+      this.formularioUser.get('fbUsuario')?.value === null ||
+      this.formularioUser.get('fbUsuario')?.value === '') {
       this.toastr.warning('Advertencia', 'Ingresar un usuario, no puede estar vacio');
       return;
     }
 
     if (this.formularioUser.get('fbClave')?.value === undefined ||
-      this.formularioUser.get('fbClave')?.value === null) {
-      this.toastr.warning('Advertencia', 'Ingresar una contraseña, no puede estar vacio');
+      this.formularioUser.get('fbClave')?.value === null ||
+      this.formularioUser.get('fbClave')?.value === '') {
+      this.toastr.warning('Advertencia', 'Ingresar una clave, no puede estar vacio');
       return;
     }
 
     const user: Usuario = {
-      user: this.formularioUser.get('fbUsuario')?.value,
-      password: this.formularioUser.get('fbClave')?.value
+      usuario: this.formularioUser.get('fbUsuario')?.value,
+      clave: this.formularioUser.get('fbClave')?.value
     }
 
     this.spinner.show('spinner-capacitacion');
     this.authService.loginSecurity(user)
       .pipe(finalize(() => this.spinner.hide('spinner-capacitacion')))
       .subscribe(authResponse => {
-        console.log('datos consultados del usuario' + authResponse);
+
+        let jwtToken: Jwt = {
+          bearer: authResponse.bearer,
+          nameUser: authResponse.nameUser,
+          token: authResponse.token,
+          grantedAuthorities: authResponse.grantedAuthorities
+        }
+        this.authStorage.setToken(jwtToken.token);
+        this.authStorage.setUsuario(jwtToken.nameUser);
+        this.authStorage.setAuthorities(jwtToken.grantedAuthorities);
         this.router.navigate(["/empleado"]);
+      }, error => {
+        console.log(error);
+        this.toastr.warning('Advertencia', 'Usuario y Clave Incorrecta');
       });
   }
 
