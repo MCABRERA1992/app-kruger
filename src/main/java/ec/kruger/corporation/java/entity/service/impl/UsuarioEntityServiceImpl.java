@@ -42,4 +42,15 @@ public class UsuarioEntityServiceImpl implements IUsuarioEntityService {
 			throw new KrugerException("Error en el proceso saveOrUpdate {EstadoEntityServiceImpl.saveOrUpdate} " + e);
 		}
 	}
+
+	@Override
+	public UsuarioEntity findById(Long id) {
+		 log.info("Iniciando proceso saveOrUpdate {EstadoEntityServiceImpl.findById}");
+		try {
+			return (UsuarioEntity) this.iUsuarioEntityRepository.findById(id).get();
+		} catch (Exception e) {
+			log.error("Error en el proceso saveOrUpdate {EstadoEntityServiceImpl.findById} ", e);
+			throw new KrugerException("Error en el proceso saveOrUpdate {EstadoEntityServiceImpl.findById} " + e);
+		}
+	}
 }

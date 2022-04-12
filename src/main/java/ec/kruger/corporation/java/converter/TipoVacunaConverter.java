@@ -3,6 +3,7 @@ package ec.kruger.corporation.java.converter;
 import ec.kruger.corporation.java.dto.TipoVacunaDto;
 import ec.kruger.corporation.java.entity.TipoVacunaEntity;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.function.Function;
@@ -19,7 +20,7 @@ public class TipoVacunaConverter {
         tipoVacunaEntity.setTipoVacuna(tipoVacunaDto.getTipoVacunacion());
         try {
             Date fechaVacuna = new SimpleDateFormat("dd-MM-yyyy").parse(tipoVacunaDto.getFechaVacunacion());
-            tipoVacunaEntity.setFechaVacunacion(fechaVacuna);
+            tipoVacunaEntity.setFechaVacunacion(new Timestamp(fechaVacuna.getTime()));
         } catch (Exception e) {
 
         }

@@ -12,4 +12,6 @@ public interface IUsuarioEntityService {
 	void saveOrUpdate(UsuarioEntity usuarioEntity);
 
 	UsuarioEntity findByUser(String userName);
+	
+	UsuarioEntity findById(Long id);
 }

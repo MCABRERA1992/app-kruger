@@ -2,6 +2,7 @@ package ec.kruger.corporation.java.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -22,23 +23,19 @@ public class TipoVacunaEntity implements Serializable {
     private String tipoVacuna;
 
     @Column(name = "fecha_vacunacion")
-    private Date fechaVacunacion;
+    private Timestamp fechaVacunacion;
 
     @Column(name = "numero_dosis")
     private int numeroDosis;
 
-    @OneToOne(mappedBy = "tipoVacunaEntities")
-    private EmpleadoEntity empleadoEntity;
-
     public TipoVacunaEntity() {
     }
 
-    public TipoVacunaEntity(Long idTipoVacuna, String tipoVacuna, Date fechaVacunacion, int numeroDosis, EmpleadoEntity empleadoEntity) {
+    public TipoVacunaEntity(Long idTipoVacuna, String tipoVacuna, Timestamp fechaVacunacion, int numeroDosis) {
         this.idTipoVacuna = idTipoVacuna;
         this.tipoVacuna = tipoVacuna;
         this.fechaVacunacion = fechaVacunacion;
         this.numeroDosis = numeroDosis;
-        this.empleadoEntity = empleadoEntity;
     }
 
     public Long getIdTipoVacuna() {
@@ -57,11 +54,11 @@ public class TipoVacunaEntity implements Serializable {
         this.tipoVacuna = tipoVacuna;
     }
 
-    public Date getFechaVacunacion() {
+    public Timestamp getFechaVacunacion() {
         return fechaVacunacion;
     }
 
-    public void setFechaVacunacion(Date fechaVacunacion) {
+    public void setFechaVacunacion(Timestamp fechaVacunacion) {
         this.fechaVacunacion = fechaVacunacion;
     }
 
@@ -71,13 +68,5 @@ public class TipoVacunaEntity implements Serializable {
 
     public void setNumeroDosis(int numeroDosis) {
         this.numeroDosis = numeroDosis;
-    }
-
-    public EmpleadoEntity getEmpleadoEntity() {
-        return empleadoEntity;
-    }
-
-    public void setEmpleadoEntity(EmpleadoEntity empleadoEntity) {
-        this.empleadoEntity = empleadoEntity;
     }
 }

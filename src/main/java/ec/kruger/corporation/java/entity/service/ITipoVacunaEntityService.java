@@ -10,4 +10,6 @@ import ec.kruger.corporation.java.entity.TipoVacunaEntity;
 public interface ITipoVacunaEntityService {
 
     void saveOrUpdate(TipoVacunaEntity tipoVacunaEntity);
+    
+    void delete(TipoVacunaEntity tipoVacunaEntity);
 }

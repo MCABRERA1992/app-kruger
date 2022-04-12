@@ -7,7 +7,7 @@ package ec.kruger.corporation.java.enums;
  **/
 public enum EnumUsuarioRol {
 
-	ROL_ADMIN("ADMINISTRADOR", "ADMIN"), ROL_EMPLEADO("EMPLEADO", "EMPLE");
+	ROL_ADMIN("ROL_ADMIN", "ADMIN"), ROL_EMPLEADO("ROL_EMPLEADO", "EMPLE");
 
 	private String decripcionRol;
 	private String codRol;

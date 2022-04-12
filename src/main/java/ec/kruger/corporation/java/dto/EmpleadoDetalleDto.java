@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author ${milton.cabrera} on 10/4/2022 16:33
+ * @author ${milton.cabrera} on 11/4/2022 9:01
  * @project app-kruger
  * @Version 1.0
  **/
@@ -14,8 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class EstadoVacunaDto {
+public class EmpleadoDetalleDto {
 
     private Long id;
-    private String estadoVacuna;
+    private String cedula;
+    private String nombre;
+    private String apellidos;
+    private String email;
+    private String tipoVacuna;
+    private int numeroDosis;
 }

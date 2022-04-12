@@ -30,15 +30,18 @@ public class test implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		
+		UsuarioEntity usuarioEntity = new UsuarioEntity();
+		usuarioEntity.setClave(passwordEncoder.encode("KRUGER"));
+		usuarioEntity.setUserKruger("KRUGER");
+
 		List<UsuarioRolEntity> usuarioRolEntityHashMap = new ArrayList<>();
 		UsuarioRolEntity usuarioRolEntity = new UsuarioRolEntity();
 		usuarioRolEntity.setEnumUsuarioRol(EnumUsuarioRol.ROL_ADMIN);
-		this.iUsuarioRolEntityService.saveOrUpdate(usuarioRolEntity);
+		usuarioRolEntity.setUsuarioEntity(usuarioEntity);
 		usuarioRolEntityHashMap.add(usuarioRolEntity);
 
-		UsuarioEntity usuarioEntity = new UsuarioEntity();
-		usuarioEntity.setClave(passwordEncoder.encode("MCABRERA"));
-		usuarioEntity.setUserKruger("MCABRERA");
 		usuarioEntity.setUsuarioRolEntities(usuarioRolEntityHashMap);
 		this.entityService.saveOrUpdate(usuarioEntity);
 

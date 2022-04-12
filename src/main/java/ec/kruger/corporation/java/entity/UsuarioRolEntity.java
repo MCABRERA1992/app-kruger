@@ -30,13 +30,18 @@ public class UsuarioRolEntity implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EnumUsuarioRol enumUsuarioRol;
 
+	@ManyToOne
+	@JoinColumn(name = "fk_usuario")
+	private UsuarioEntity usuarioEntity;
+
 	public UsuarioRolEntity() {
 	}
 
-	public UsuarioRolEntity(long idRolUsuario, EnumUsuarioRol enumUsuarioRol) {
+	public UsuarioRolEntity(long idRolUsuario, EnumUsuarioRol enumUsuarioRol, UsuarioEntity usuarioEntity) {
 		super();
 		this.idRolUsuario = idRolUsuario;
 		this.enumUsuarioRol = enumUsuarioRol;
+		this.usuarioEntity = usuarioEntity;
 	}
 
 	public long getIdRolUsuario() {
@@ -55,8 +60,17 @@ public class UsuarioRolEntity implements Serializable {
 		this.enumUsuarioRol = enumUsuarioRol;
 	}
 
+	public UsuarioEntity getUsuarioEntity() {
+		return usuarioEntity;
+	}
+
+	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+		this.usuarioEntity = usuarioEntity;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	
 }

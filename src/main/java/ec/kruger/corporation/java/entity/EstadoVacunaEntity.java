@@ -20,16 +20,12 @@ public class EstadoVacunaEntity implements Serializable {
     @Column(name = "decripcion_estado_vacuna")
     private String descripcionEstadoVacuna;
 
-    @OneToOne(mappedBy = "estadoVacunaEntities")
-    private EmpleadoEntity empleadoEntitys;
-
     public EstadoVacunaEntity() {
     }
 
-    public EstadoVacunaEntity(Long idEstadoVacuna, String descripcionEstadoVacuna, EmpleadoEntity empleadoEntitys) {
+    public EstadoVacunaEntity(Long idEstadoVacuna, String descripcionEstadoVacuna) {
         this.idEstadoVacuna = idEstadoVacuna;
         this.descripcionEstadoVacuna = descripcionEstadoVacuna;
-        this.empleadoEntitys = empleadoEntitys;
     }
 
     public Long getIdEstadoVacuna() {
@@ -46,13 +42,5 @@ public class EstadoVacunaEntity implements Serializable {
 
     public void setDescripcionEstadoVacuna(String descripcionEstadoVacuna) {
         this.descripcionEstadoVacuna = descripcionEstadoVacuna;
-    }
-
-    public EmpleadoEntity getEmpleadoEntitys() {
-        return empleadoEntitys;
-    }
-
-    public void setEmpleadoEntitys(EmpleadoEntity empleadoEntitys) {
-        this.empleadoEntitys = empleadoEntitys;
     }
 }

@@ -18,7 +18,11 @@ public interface IEmpleadoEntityService {
 
     List<EmpleadoEntity> findAllEmpleado();
 
-    List<EmpleadoEntity> criterioBusqueda(String estadoVacuna, String tipoVacuna, String fechaVacunacion);
+    List<EmpleadoEntity> criterioBusqueda(String estadoVacuna, String tipoVacuna, String fechaIniciao, String fechaFin);
 
     void delete(Long id);
+
+    List<EmpleadoEntity> buscarxuserKruger(String userKruger);
+    
+    EmpleadoEntity findById(Long id);
 }

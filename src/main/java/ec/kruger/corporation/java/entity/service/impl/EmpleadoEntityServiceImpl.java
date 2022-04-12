@@ -57,24 +57,29 @@ public class EmpleadoEntityServiceImpl implements IEmpleadoEntityService {
     }
 
     @Override
-    public List<EmpleadoEntity> criterioBusqueda(String estadoVacuna, String tipoVacuna, String fechaVacunacion) {
+    public List<EmpleadoEntity> criterioBusqueda(String estadoVacuna, String tipoVacuna, String fechaInicio, String fechaFin) {
+
         try {
             log.info("Inicando proceso de {EmpleadoEntityServiceImpl.criterioBusqueda}");
-            if (StringUtils.isNotEmpty(estadoVacuna)) {
-                log.info("Inicando proceso de Busqueda {EmpleadoEntityServiceImpl.criterioBusqueda} " + estadoVacuna);
+            if ((StringUtils.isNotEmpty(estadoVacuna) && StringUtils.isNotEmpty(tipoVacuna)) && ((StringUtils.isNotEmpty(fechaInicio) && StringUtils.isNotEmpty(fechaFin)))) {
+                return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxFullFiltro(estadoVacuna, tipoVacuna, fechaInicio, fechaFin);
+            } else if (StringUtils.isNotEmpty(fechaInicio) && StringUtils.isNotEmpty(fechaFin)) {
+                return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxFiltroFecha(fechaInicio, fechaFin);
+            } else if (StringUtils.isNotEmpty(estadoVacuna) && StringUtils.isNotEmpty(tipoVacuna)) {
+                return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxEstadoVacunaxTipoVacuna(estadoVacuna, tipoVacuna);
+            } else if (StringUtils.isNotEmpty(estadoVacuna)) {
                 return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxEstadoVacuna(estadoVacuna);
             } else if (StringUtils.isNotEmpty(tipoVacuna)) {
-                log.info("Inicando proceso de Busqueda {EmpleadoEntityServiceImpl.criterioBusqueda} " + tipoVacuna);
                 return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxTipoVacuna(tipoVacuna);
-            } else if (Objects.nonNull(fechaVacunacion)) {
-                log.info("Inicando proceso de Busqueda {EmpleadoEntityServiceImpl.criterioBusqueda} " + fechaVacunacion);
-//                return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.findBy().;
+            } else if (Objects.nonNull(fechaInicio) && (Objects.nonNull(fechaFin))) {
+
             }
         } catch (Exception e) {
             log.error("Error en el proceso de {EmpleadoEntityServiceImpl.criterioBusqueda}" + e);
             throw new KrugerException("Error en el proceso de {EmpleadoEntityServiceImpl.criterioBusqueda} " + e);
         }
         return new ArrayList<>();
+
     }
 
     @Override
@@ -82,10 +87,31 @@ public class EmpleadoEntityServiceImpl implements IEmpleadoEntityService {
         try {
             log.info("Inicando proceso de {EmpleadoEntityServiceImpl.delete}");
             this.iEmpleadoEntityRepository.deleteById(id);
-            log.info("Inicando proceso de {EmpleadoEntityServiceImpl.delete}");
         } catch (Exception e) {
             log.error("Error en el proceso de {EmpleadoEntityServiceImpl.delete}" + e);
             throw new KrugerException("Error en el proceso de {EmpleadoEntityServiceImpl.delete} " + e);
+        }
+    }
+
+    @Override
+    public List<EmpleadoEntity> buscarxuserKruger(String userKruger) {
+        try {
+            log.info("Inicando proceso de {EmpleadoEntityServiceImpl.buscarxuserKruger}");
+            return (List<EmpleadoEntity>) this.iEmpleadoEntityRepository.buscarxuserKruger(userKruger);
+        } catch (Exception e) {
+            log.error("Error en el proceso de {EmpleadoEntityServiceImpl.buscarxuserKruger}" + e);
+            throw new KrugerException("Error en el proceso de {EmpleadoEntityServiceImpl.buscarxuserKruger} " + e);
+        }
+    }
+
+    @Override
+    public EmpleadoEntity findById(Long id) {
+        try {
+            log.info("Inicando proceso de {EmpleadoEntityServiceImpl.findById}");
+            return (EmpleadoEntity) this.iEmpleadoEntityRepository.findById(id).get();
+        } catch (Exception e) {
+            log.error("Error en el proceso de {EmpleadoEntityServiceImpl.findById}" + e);
+            throw new KrugerException("Error en el proceso de {EmpleadoEntityServiceImpl.findById} " + e);
         }
     }
 }

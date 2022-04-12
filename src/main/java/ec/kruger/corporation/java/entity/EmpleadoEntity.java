@@ -2,6 +2,7 @@ package ec.kruger.corporation.java.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class EmpleadoEntity implements Serializable {
     private String correoElectronico;
 
     @Column(name = "fecha_nacimiento")
-    private Date fechaNacimiento;
+    private Timestamp fechaNacimiento;
 
     @Column(name = "direccion_domicilio")
     private String direccionDomicilio;
@@ -40,18 +41,21 @@ public class EmpleadoEntity implements Serializable {
     @Column(name = "telefono_movil")
     private String telefonoMovil;
 
+    @Column(name = "usuario_kruger")
+    private String usuarioKruger;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_estado_vacuna")
+    @JoinColumn(name = "fk_estado_vacuna", referencedColumnName = "id_estado_vacuna")
     private EstadoVacunaEntity estadoVacunaEntities;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_tipo_vacuna")
+    @JoinColumn(name = "fk_tipo_vacuna", referencedColumnName = "id_tipo_vacuna")
     private TipoVacunaEntity tipoVacunaEntities;
 
     public EmpleadoEntity() {
     }
 
-    public EmpleadoEntity(Long idEmpleado, String cedula, String nombre, String apellido, String correoElectronico, Date fechaNacimiento, String direccionDomicilio, String telefonoMovil, EstadoVacunaEntity estadoVacunaEntities, TipoVacunaEntity tipoVacunaEntities) {
+    public EmpleadoEntity(Long idEmpleado, String cedula, String nombre, String apellido, String correoElectronico, Timestamp fechaNacimiento, String direccionDomicilio, String telefonoMovil, String usuarioKruger, EstadoVacunaEntity estadoVacunaEntities, TipoVacunaEntity tipoVacunaEntities) {
         this.idEmpleado = idEmpleado;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -60,6 +64,7 @@ public class EmpleadoEntity implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.direccionDomicilio = direccionDomicilio;
         this.telefonoMovil = telefonoMovil;
+        this.usuarioKruger = usuarioKruger;
         this.estadoVacunaEntities = estadoVacunaEntities;
         this.tipoVacunaEntities = tipoVacunaEntities;
     }
@@ -104,11 +109,11 @@ public class EmpleadoEntity implements Serializable {
         this.correoElectronico = correoElectronico;
     }
 
-    public Date getFechaNacimiento() {
+    public Timestamp getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(Timestamp fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -126,6 +131,14 @@ public class EmpleadoEntity implements Serializable {
 
     public void setTelefonoMovil(String telefonoMovil) {
         this.telefonoMovil = telefonoMovil;
+    }
+
+    public String getUsuarioKruger() {
+        return usuarioKruger;
+    }
+
+    public void setUsuarioKruger(String usuarioKruger) {
+        this.usuarioKruger = usuarioKruger;
     }
 
     public EstadoVacunaEntity getEstadoVacunaEntities() {

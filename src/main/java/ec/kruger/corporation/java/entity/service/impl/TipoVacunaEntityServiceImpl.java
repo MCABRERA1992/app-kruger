@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class TipoVacunaEntityServiceImpl implements ITipoVacunaEntityService {
+	
     @Autowired
     private ITipoVacunaEntityRepository iTipoVacunaEntityRepository;
 
@@ -30,4 +31,16 @@ public class TipoVacunaEntityServiceImpl implements ITipoVacunaEntityService {
             throw new KrugerException("Error en el proceso saveOrUpdate {TipoVacunaEntityServiceImpl.saveOrUpdate} " + e);
         }
     }
+
+	@Override
+	public void delete(TipoVacunaEntity tipoVacunaEntity) {
+		log.info("Iniciando proceso saveOrUpdate {TipoVacunaEntityServiceImpl.delete}");
+        try {
+            this.iTipoVacunaEntityRepository.delete(tipoVacunaEntity);
+            log.info("Proceso finalizado saveOrUpdate {TipoVacunaEntityServiceImpl.delete}");
+        } catch (Exception e) {
+            log.error("Error en el proceso saveOrUpdate {TipoVacunaEntityServiceImpl.delete} ", e);
+            throw new KrugerException("Error en el proceso saveOrUpdate {TipoVacunaEntityServiceImpl.delete} " + e);
+        }
+	}
 }
